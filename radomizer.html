@@ -1,0 +1,111 @@
+
+<html>
+
+<head>
+<title> Random Choice </title>
+
+<SCRIPT>
+
+// When we move out of the text window,
+// or when we click the submit button, 
+// choose a random line from the input window
+// and copy it to the output
+
+function PickOne()
+{
+   var f = document.parm;
+
+   // select the input
+   var allInput = f.InArea.value;
+
+   // allInput should be a string
+   // create an array of strings, splitting at newlines
+   var a = allInput.split("\n");
+
+   var nStrings = a.length;
+
+   // while the last line is blank, ignore it
+   while (a[nStrings-1] == "") nStrings = nStrings - 1;
+
+   // get a random index  (but as a float)
+   var n1 = Math.random() * nStrings;
+
+   // get an integer value
+   var nSelect = Math.floor(n1);
+
+   // and display the selected line
+   f.SelectedOne.readOnly = false;
+   f.SelectedOne.style.backgroundColor="#FFFFFF";
+   f.SelectedOne.value = a[nSelect];
+   f.SelectedOne.readOnly = true;
+}
+
+
+</SCRIPT>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
+    body {
+        font-family: ABeeZee;
+        font-size: 12px;
+        background-color: #1e1e2e;
+        color: #cdd6f4;
+
+        
+    }
+
+    .button {
+        font-family: ABeeZee;
+        font-size: 10px;
+        background-color: #f5c2e7;
+        color: #181825;
+        border-radius: 5px;
+        padding: 5px;
+        width: 50px;
+        }
+
+    #randomizer {
+        position: absolute;
+        left: 37%;
+        top: 15%;
+    }
+</style>
+
+</head>
+
+
+<body>
+
+
+<p>
+<form NAME=parm>
+
+<table id="randomizer">
+<tr align=center> <td colspan=2> <b> Random Choice </b> </td> </tr>
+
+<!- The button to make a choice -->
+<tr align=left><td><INPUT TYPE=button value="Choose" onClick="PickOne()" class="button"></td>
+
+<!- for completeness -- to empty both input and output -->
+<td align=right> <INPUT TYPE=reset class="button"> </td> </tr>
+
+
+<!- The input text area -->
+
+<tr><td colspan=2>Enter items from which to choose (one per line) </td></tr>
+
+<tr><td colspan=2><textarea NAME=InArea rows=10 cols=55></textarea> </td></tr>
+
+<tr><td colspan=2><hr> </td> <td><br></td></tr>
+
+<!- The output selected item -->
+<tr><td colspan=2> Chosen Item </td></tr>
+<p>
+<tr><td colspan=2><textarea  NAME=SelectedOne rows=1 cols=55 readOnly=true> </textarea></td></tr>
+
+</table>
+</FORM>
+
+</body>
+</html>
